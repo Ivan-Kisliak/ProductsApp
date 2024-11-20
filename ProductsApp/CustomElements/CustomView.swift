@@ -22,13 +22,21 @@ class CustomView: UIView {
     init(product: Product) {
         super.init(frame: .zero)
         self.product = product
-        setup(product: product)
+        configure(product: product)
+        setupViews()
         setupLayout()
     }
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(product: Product) {
+        titleLabel.text = product.title
+        imageProduct.image = UIImage(named: product.imageName)
+        descriptionLabel.text = product.description
+        priceLabel.text = "\(product.price)₽"
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -41,7 +49,7 @@ class CustomView: UIView {
 
 //MARK: - Settings View
 private extension CustomView {
-    func setup(product: Product) {
+    func setupViews() {
         backgroundColor = UIColor(cgColor: CGColor(red: 230/255,
                                                    green: 230/255,
                                                    blue: 250/255,
@@ -49,10 +57,10 @@ private extension CustomView {
         layer.cornerRadius = 20
         
         setupShadow()
-        setupTitleLabel(product: product)
-        setupImage(product: product)
-        setupDescription(product: product)
-        setupPriceLabel(product: product)
+        setupTitleLabel()
+        setupImage()
+        setupDescription()
+        setupPriceLabel()
         
         addSubviews()
     }
@@ -71,26 +79,22 @@ private extension CustomView {
         layer.shadowRadius = 10
     }
     
-    func setupTitleLabel(product: Product) {
-        titleLabel.text = product.title
+    func setupTitleLabel() {
         titleLabel.font = .boldSystemFont(ofSize: 20)
     }
     
-    func setupImage(product: Product) {
-        imageProduct.image = UIImage(named: product.imageName)
+    func setupImage() {
         imageProduct.layer.cornerRadius = 10
         imageProduct.clipsToBounds = true
         imageProduct.contentMode = .scaleAspectFill
     }
     
-    func setupDescription(product: Product) {
-        descriptionLabel.text = product.description
+    func setupDescription() {
         descriptionLabel.font = .systemFont(ofSize: 15)
         descriptionLabel.numberOfLines = 0
     }
     
-    func setupPriceLabel(product: Product) {
-        priceLabel.text = "\(product.price)₽"
+    func setupPriceLabel() {
         priceLabel.font = .systemFont(ofSize: 24)
     }
     
@@ -104,9 +108,6 @@ private extension CustomView {
          priceLabel,
          imageProduct
         ].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
-        
-        //        let constraint = priceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
-        //        constraint.priority = .defaultLow
         
         NSLayoutConstraint.activate([
             widthAnchor.constraint(equalToConstant: 280),

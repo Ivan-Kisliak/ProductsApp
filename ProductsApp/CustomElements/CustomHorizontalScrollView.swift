@@ -39,9 +39,11 @@ class CustomHorizontalScrollView: UIView {
     }
 }
 
+//MARK: - Setting views
 private extension CustomHorizontalScrollView {
     func setupView() {
         scrollView.addSubview(stackView)
+        
         addSubview(scrollView)
         
         setupStackView()
@@ -53,10 +55,11 @@ private extension CustomHorizontalScrollView {
     }
 }
 
+//MARK: - Setting layout
 private extension CustomHorizontalScrollView {
     func setupScrollView() {
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        [scrollView,
+         stackView].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
 
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: topAnchor, constant: 16),

@@ -39,13 +39,4 @@ extension SceneDelegate {
 
 
 
-//extension SceneDelegate {
-//    func buildProductManager() -> IProductManager {
-//        let shopDataManager: IShopDataManager = ShopDataManager()
-//        let productManager = ProductManager()
-//        productManager.addProducts(shopDataManager.getProducts())
-//        return productManager
-//    }
-//}
-
 
