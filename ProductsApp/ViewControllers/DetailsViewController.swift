@@ -20,6 +20,7 @@ class DetailsViewController: UIViewController {
         setupLayout()
     }
     
+//MARK: - Life cycle
     func configure(product: Product?) {
         if let product {
             imageProduct.image = UIImage(named: product.imageName)
